@@ -1,0 +1,13 @@
+{
+  "name": "interview-test",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "Guy Harwood",
+  "license": "MIT",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "devDependencies": {
+    "jasmine": "^2.9.0"
+  }
+}
