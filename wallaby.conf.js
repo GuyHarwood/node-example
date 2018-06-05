@@ -8,6 +8,7 @@ module.exports = function (w) {
     files: [
       'controllers/**/*.js',
       'services/**/*.js',
+      'routes/**/*.js',
       'lib/**/*.js'
     ],
     tests: [
