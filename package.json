@@ -5,9 +5,15 @@
   "author": "Guy Harwood",
   "license": "MIT",
   "scripts": {
+    "run": "NODE_ENV=PRODUCTION node app.js",
+    "dev": "NODE_ENV=DEVELOPMENT node app.js",
     "test": "jasmine"
   },
   "devDependencies": {
-    "jasmine": "^2.9.0"
+    "jasmine": "^2.9.0",
+    "sinon": "^7.0.0"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
   }
 }
