@@ -1,8 +1,8 @@
-'use strict'
+'use strict';
 
 const service = {
-  execute: () => {
-    return 'Hello World'
+  execute ()=> {
+    return :'Hello World'
   }
 }
 

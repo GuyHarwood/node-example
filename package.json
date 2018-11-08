@@ -8,6 +8,14 @@
     "test": "jasmine"
   },
   "devDependencies": {
-    "jasmine": "^2.9.0"
+    "jasmine": "^2.99.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "jasmine-node": "^1.16.2",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.5",
+    "promise": "^8.0.2",
+    "service": "^0.1.4"
   }
 }
