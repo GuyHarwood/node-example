@@ -9,9 +9,13 @@ describe('The current time controller', () => {
     mockedRequest = {
       params: {offset}
     }
+
+    const jsonMock = jasmine.createSpy('json')
     mockedResponse = {
-      status: jasmine.createSpy('status'),
-      send: jasmine.createSpy('send')
+      status: jasmine.createSpy('status').and.returnValue({
+        json: jsonMock
+      }),
+      json: jsonMock
     }
   })
 
@@ -27,9 +31,8 @@ describe('The current time controller', () => {
   it('should get and return time from time service', () => {
     offset = 6
     const controller = new CurrentTime(mockedRequest, mockedResponse)   
-    jasmine.spyOn(controller.timeService, 'getCurrent').and.callThrough(() => {
-      return '12:34:56'
-    })
+    controller.timeService.getCurrent = jasmine.createSpy('getCurrent')
+      .and.returnValue('12:34:56')
 
     controller.process()
 
@@ -39,7 +42,7 @@ describe('The current time controller', () => {
     expect(mockedResponse.status)
       .toHaveBeenCalledWith(200)
 
-    expect(mockedResponse.send)
+    expect(mockedResponse.json)
       .toHaveBeenCalledWith({time: '12:34:56'})
   })
 })
