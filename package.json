@@ -5,6 +5,7 @@
   "author": "Guy Harwood",
   "license": "MIT",
   "scripts": {
+    "start": "node app.js",
     "test": "jasmine"
   },
   "devDependencies": {
