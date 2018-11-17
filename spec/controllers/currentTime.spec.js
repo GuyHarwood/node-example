@@ -7,7 +7,7 @@ describe('The current time controller', () => {
 
   beforeAll(() => {
     mockedRequest = {
-      params: {offset}
+      query: {offset}
     }
 
     const jsonMock = jasmine.createSpy('json')
@@ -20,7 +20,7 @@ describe('The current time controller', () => {
   })
 
   it('should reject a non-allowed offset', () => {
-    mockedRequest.params.offset = -13
+    mockedRequest.query.offset = -13
     const controller = new CurrentTime(mockedRequest, mockedResponse)   
 
     controller.validate()
@@ -30,7 +30,7 @@ describe('The current time controller', () => {
       .toHaveBeenCalledWith(400)
   })
   it('should get and return time from time service', () => {
-    mockedRequest.params.offset = 6
+    mockedRequest.query.offset = 6
     const controller = new CurrentTime(mockedRequest, mockedResponse)   
     spyOn(controller.timeService, 'getCurrent')
       .and.returnValue('12:34:56')

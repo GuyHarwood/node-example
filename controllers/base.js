@@ -1,6 +1,6 @@
 module.exports = class Controller {
   constructor(request, response) {
-    this.params = request.params
+    this.params = request.query
     this.response = response
   }
 
