@@ -20,20 +20,22 @@ describe('The current time controller', () => {
   })
 
   it('should reject a non-allowed offset', () => {
-    offset = -13
+    mockedRequest.params.offset = -13
     const controller = new CurrentTime(mockedRequest, mockedResponse)   
 
+    controller.validate()
     controller.process()
 
     expect(mockedResponse.status)
       .toHaveBeenCalledWith(400)
   })
   it('should get and return time from time service', () => {
-    offset = 6
+    mockedRequest.params.offset = 6
     const controller = new CurrentTime(mockedRequest, mockedResponse)   
     controller.timeService.getCurrent = jasmine.createSpy('getCurrent')
       .and.returnValue('12:34:56')
 
+    controller.validate()
     controller.process()
 
     expect(controller.timeService.getCurrent)
