@@ -32,7 +32,7 @@ describe('The current time controller', () => {
   it('should get and return time from time service', () => {
     mockedRequest.params.offset = 6
     const controller = new CurrentTime(mockedRequest, mockedResponse)   
-    controller.timeService.getCurrent = jasmine.createSpy('getCurrent')
+    spyOn(controller.timeService, 'getCurrent')
       .and.returnValue('12:34:56')
 
     controller.validate()
