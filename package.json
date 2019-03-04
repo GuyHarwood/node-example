@@ -5,9 +5,13 @@
   "author": "Guy Harwood",
   "license": "MIT",
   "scripts": {
+    "serve": "node server/server.js",
     "test": "jasmine"
   },
   "devDependencies": {
     "jasmine": "^2.9.0"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
   }
 }
