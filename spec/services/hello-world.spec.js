@@ -2,10 +2,11 @@
 
 /* global describe, it, expect */
 
-describe('Hello World Service', () => {
-  const sut = require('../../services/hello-world')
-  it('returns Hello World Message', () => {
-    const message = sut.execute()
-    expect(message).toBe('Hello Worlds')
+describe('return date', () => {
+  const sut = require('../../services/showTime')
+  it('should be string', () => {
+    const date = sut.execute()
+    let typeCheck = typeof date
+    expect(typeCheck).toEqual('string');
   })
 })
