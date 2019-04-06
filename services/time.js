@@ -2,23 +2,24 @@
 const moment = require('moment');
 
 const service = {
-  execute: (req, res, next) => {
+  execute: (queryOffset = null) => {
     const stringOffset = /((\-((0[0-9])|(1[0-2])))|(((0[0-9])|(1[0-4])))):00/;
-
+    let ret;
     let offset = {
       value: null,
       error: false,
       mode: null
     }
-    if (req.query.hasOwnProperty('offset')) {
-      // test req.query.offset against regex
+    if (queryOffset) {
+      queryOffset = queryOffset.trim();
+      // test offset against regex
       // determine offset
-      if (stringOffset.test(req.query.offset)) {
-        offset.value = (req.query.offset[0] !== '-' ? '+': '') + req.query.offset;
+      if (stringOffset.test(queryOffset)) {
+        offset.value = (queryOffset[0] !== '-' ? '+': '') + queryOffset;
         offset.mode = 'string_GMT';
       }
       else {
-        let num = Number(req.query.offset);
+        let num = Number(queryOffset);
         if (num !== 0 && !num) {
           offset.error = true;
         }
@@ -32,11 +33,13 @@ const service = {
     }
     if (!offset.error) {
       let momentTime = !offset.value ? moment().format('HH:mm') : moment().utcOffset(offset.value).format('hh:mm');
-      res.send(momentTime);
+      // res.send(momentTime);
+      ret = momentTime;
     }
     else {
-      res.send(`The offset provided (${req.query.offset}) is not valid.\nValid offset inputs:\n - '-12:00'-'+14:00'\n -Numbers, where if less than 16 and greater than -16 will be interpreted as hours, otherwise minutes.`)
+      ret = `The offset provided (${queryOffset}) is not valid.\nValid offset inputs:\n - '-12:00'-'+14:00'\n -Numbers, where if less than 16 and greater than -16 will be interpreted as hours, otherwise minutes.`;
     }
+    return ret;
 
   }
 }
