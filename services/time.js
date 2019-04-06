@@ -2,24 +2,30 @@
 const moment = require('moment');
 
 const service = {
+  //Setting querryOffset = null, to return current time in case no value is provided
   execute: (queryOffset = null) => {
-    const stringOffset = /((\-((0[0-9])|(1[0-2])))|(((0[0-9])|(1[0-4])))):00/;
+    //When string value provided, RegEx ensures the value complies with the format
+    const stringOffset = /((\-((0[0-9])|(1[0-2])))|(\+((0[0-9])|(1[0-4])))|(((0[0-9])|(1[0-4])))):00/;
     let ret;
     let offset = {
       value: null,
       error: false,
       mode: null
-    }
+    };
     if (queryOffset) {
+      //Trimming the spaces
       queryOffset = queryOffset.trim();
       // test offset against regex
       // determine offset
-      if (stringOffset.test(queryOffset)) {
+      let result = stringOffset.exec(queryOffset)
+      if (result && queryOffset === result[0]) {
+        //Ensure that MomentJS gets the proper offset parameter
         offset.value = (queryOffset[0] !== '-' ? '+': '') + queryOffset;
         offset.mode = 'string_GMT';
       }
       else {
         let num = Number(queryOffset);
+        //Check NaN case
         if (num !== 0 && !num) {
           offset.error = true;
         }
@@ -32,11 +38,11 @@ const service = {
       }
     }
     if (!offset.error) {
-      let momentTime = !offset.value ? moment().format('HH:mm') : moment().utcOffset(offset.value).format('hh:mm');
-      // res.send(momentTime);
-      ret = momentTime;
+      //Checking if there is offset value and act accordingly
+       ret = !offset.value ? moment().format('HH:mm') : moment().utcOffset(offset.value).format('HH:mm');
     }
     else {
+      //Error case
       ret = `The offset provided (${queryOffset}) is not valid.\nValid offset inputs:\n - '-12:00'-'+14:00'\n -Numbers, where if less than 16 and greater than -16 will be interpreted as hours, otherwise minutes.`;
     }
     return ret;
