@@ -2,7 +2,7 @@
 
 ## Tasks
 
-1. Create controller API endpoint with GET method that returns current time
+1. Create controller API endpoint with GET method that returns current time in UTC
 2. Back controller with a service
-3. Extend service to allow GMT offset to be passed in via controller param
+3. Extend service to allow string timezone identifier (such as 'GMT') to be passed in via controller param
 4. Ensure implementation follows TDD
