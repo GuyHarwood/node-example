@@ -5,9 +5,15 @@
   "author": "Guy Harwood",
   "license": "MIT",
   "scripts": {
-    "test": "jasmine"
+    "test": "jasmine",
+    "start": "node ./bin/www"
   },
   "devDependencies": {
-    "jasmine": "^2.9.0"
+    "jasmine": "^2.9.0",
+    "sinon": "^7.2.5"
+  },
+  "dependencies": {
+    "express": "4.13.1",
+    "moment": "2.24.0"
   }
 }
